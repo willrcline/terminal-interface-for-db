@@ -177,7 +177,7 @@ async function init() {
                 if (err) {
                     reject(err);
                 } else {
-                    console.log(results)
+                    console.table(results)
                 }
             })
             break
