@@ -140,6 +140,7 @@ const questions = [
         SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
         WHERE TABLE_NAME = ? AND COLUMN_KEY != 'PRI'
+        ORDER BY ORDINAL_POSITION;
       `;
       db.query(query, tableName, (err, results) => {
         if (err) {
@@ -169,10 +170,9 @@ function getInsertValuesFromAnswersObjInStrFormat(obj) {
 
 async function init() {
     var answers = await inquirer.prompt(questions)
-    console.log(answers)
+    // console.log(answers)
     switch (answers.commandCategory){
         case "View Data":
-            console.log("View Data_____________")
             db.query(`SELECT * FROM ${answers.table}`, (err, results) => {
                 if (err) {
                     reject(err);
@@ -182,17 +182,16 @@ async function init() {
             })
             break
         case "Add or Update Data":
-            console.log("Add or Update Data_________")
             var column_names = await getColumnNames(answers.table)
-            console.log("column_names______", column_names)
 
             var row_values = getInsertValuesFromAnswersObjInStrFormat(answers)
-            console.log("row_values________",row_values)
             db.query(`INSERT INTO ${answers.table} (${column_names}) VALUES (${row_values})`)
-            break;
-            // db.query(`INSERT INTO role (title, salary, department_id) VALUES ("test role title", 150000, 1)`)
+            console.log(`Added data to "${answers.table}" table.
             
+            `)
+            break;
     }
+    init()
 }
 
 init()

@@ -1,4 +1,5 @@
 # Terminal Interface for DataBase
+[Video Demo](https://drive.google.com/file/d/1axcUEu9Ss5hDD3oy8F2TbnEb6fB72Iwp/view)
 
 ## Description
 User friendly terminal menu for viewing and inserting data into database for company
